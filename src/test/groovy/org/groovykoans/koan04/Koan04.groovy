@@ -36,7 +36,7 @@ class Koan04 extends GroovyTestCase {
         def expectedHelloClosureResult
         // ------------ START EDITING HERE ----------------------
 
-
+        expectedHelloClosureResult = 'Hello from Closure'
         // ------------ STOP EDITING HERE  ----------------------
         assert helloClosureResult == expectedHelloClosureResult
 
@@ -45,7 +45,7 @@ class Koan04 extends GroovyTestCase {
         String helloRonalda = personalizedHelloClosure('Ronalda')
 
         // What is the result from the above execution?
-        String expectedHelloRonalda
+        String expectedHelloRonalda ='Hello Ronalda'
         // ------------ START EDITING HERE ----------------------
 
 
@@ -59,7 +59,7 @@ class Koan04 extends GroovyTestCase {
         String happyBirthdayGranger = happyBirthdayClosure('Hermione')
 
         // What is the result from the above execution?
-        def expectedHappyBirthdayGranger
+        def expectedHappyBirthdayGranger = "Happy Birthday To Hermione"
         // ------------ START EDITING HERE ----------------------
 
 
@@ -69,7 +69,7 @@ class Koan04 extends GroovyTestCase {
         // Create a closure that accepts two integers, adds them, and multiplies the result by two
         def resultClosure
         // ------------ START EDITING HERE ----------------------
-
+        resultClosure = { Number a,Number b -> (a+b) *2 }
 
         // ------------ STOP EDITING HERE  ----------------------
 
@@ -101,7 +101,7 @@ class Koan04 extends GroovyTestCase {
         // Let's check that we got the same result (you can use the assertX methods)
         // ------------ START EDITING HERE ----------------------
 
-
+        assert  javaResult.size() == groovyResult.size()
         // ------------ STOP EDITING HERE  ----------------------
 
         // To make the code even cleaner, Groovy allows some syntactic sugar. If your method has a closure as its
@@ -114,7 +114,7 @@ class Koan04 extends GroovyTestCase {
         }
 
         // What will monkeyColors contain?
-        def expectedMonkeyColors = []
+        def expectedMonkeyColors = ['blue','red','purple']
         // ------------ START EDITING HERE ----------------------
 
 
@@ -129,8 +129,10 @@ class Koan04 extends GroovyTestCase {
         StringWriter filteredResult = new StringWriter()
         def prefix = 'src/test/groovy/org/groovykoans/koan04/'
         // ------------ START EDITING HERE ----------------------
-
-
+         
+        def inputFile = new File("$prefix/exercise.txt"); 
+        inputFile.filterLine(filteredResult)
+        {!it.startsWith('#') };
         // ------------ STOP EDITING HERE  ----------------------
 
         String result = filteredResult.toString().trim().replaceAll(/[\n\r]+/, '\n')
@@ -146,7 +148,7 @@ class Koan04 extends GroovyTestCase {
 
         // Can you guess what count() does? If not, look it up in
         // http://docs.groovy-lang.org/latest/html/groovy-jdk/java/lang/String.html
-        def expectedCount
+        def expectedCount = 3
         // ------------ START EDITING HERE ----------------------
 
 
@@ -161,7 +163,7 @@ class Koan04 extends GroovyTestCase {
         }
 
         // What will the value of mysteryList be?
-        def expectedMysteryList
+        def expectedMysteryList = [ 'Baby', 'Yeah']
         // ------------ START EDITING HERE ----------------------
 
 
