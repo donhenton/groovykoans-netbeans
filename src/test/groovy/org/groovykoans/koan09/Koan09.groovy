@@ -31,7 +31,8 @@ class Koan09 extends GroovyTestCase {
         // add a sayHello() method that returns "Hello from ${firstName}"
         def expando = new Expando()
         // ------------ START EDITING HERE ----------------------
-
+        expando.firstName = 'bonzo'
+        expando.sayHello = { "Hello from ${expando.firstName}" }
 
         // ------------ STOP EDITING HERE  ----------------------
 
@@ -46,9 +47,10 @@ class Koan09 extends GroovyTestCase {
 
         // sensitiveService.nukeCity(username, city) allows you to nuke cities. But only if you're an 'admin'.
         // Using the NukeInterceptor, make sure that only admin is allowed to run this service.
-        def proxy
+        def proxy =ProxyMetaClass.getInstance(SensitiveService)
         // ------------ START EDITING HERE ----------------------
-
+        def interceptor = new NukeInterceptor()
+        proxy.interceptor = interceptor
 
         // ------------ STOP EDITING HERE  ----------------------
 
@@ -67,7 +69,7 @@ class Koan09 extends GroovyTestCase {
         // Some reading is available here: http://docs.groovy-lang.org/latest/html/documentation/index.html#_closures
 
         // In Java, we only have the 'this' keyword. It returns the current instance. Groovy does exactly the same.
-        def expectedThisClassName
+        def expectedThisClassName = 'org.groovykoans.koan09.Koan09'
         // ------------ START EDITING HERE ----------------------
 
 
@@ -96,9 +98,10 @@ class Koan09 extends GroovyTestCase {
         def weightOnEarth = calculateWeight(10)
 
         // Can you figure out what the values for weightOnEarth and weightOnMoon are?
-        def expectedWeightOnMoon, expectedWeightOnEarth
+        
         // ------------ START EDITING HERE ----------------------
-
+        def expectedWeightOnMoon =1.655 
+        def expectedWeightOnEarth=10
 
         // ------------ STOP EDITING HERE  ----------------------
         assert weightOnEarth == expectedWeightOnEarth
@@ -108,8 +111,8 @@ class Koan09 extends GroovyTestCase {
         // http://stackoverflow.com/questions/8120949/what-does-delegate-mean-in-groovy/8121750#8121750
         // Create a fake environment using the technique in the link to create a gravity of 6
         // ------------ START EDITING HERE ----------------------
-
-
+        
+        calculateWeight.delegate = new ConstantsOnFake()
         // ------------ STOP EDITING HERE  ----------------------
         def weightOnFakePlanet = calculateWeight(10)
         assert weightOnFakePlanet == 60

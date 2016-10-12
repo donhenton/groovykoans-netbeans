@@ -7,6 +7,9 @@
 
 package org.groovykoans.koan09
 
+import groovy.util.logging.Slf4j
+
+@Slf4j("LOG")
 class NukeInterceptor implements Interceptor {
 
     boolean isAuthorized = true
@@ -14,7 +17,25 @@ class NukeInterceptor implements Interceptor {
     @Override
     Object beforeInvoke(Object obj, String methodName, Object[] args) {
         // ------------ START EDITING HERE ----------------------
-
+        //  def userName = args[0];
+        //  LOG.debug("${obj} ${methodName} ${args}")
+        if (methodName.equals("nukeCity"))
+        {
+            def userName = args[0];
+            if (userName.equals("admin"))
+            {
+                isAuthorized = true
+             
+            }
+            else
+            {
+                isAuthorized = false
+            }
+            
+        }
+        
+        
+        //        
 
         // ------------ STOP EDITING HERE  ----------------------
     }
@@ -23,14 +44,14 @@ class NukeInterceptor implements Interceptor {
     Object afterInvoke(Object obj, String methodName, Object[] args, Object result) {
         // ------------ START EDITING HERE ----------------------
 
-
+        result
         // ------------ STOP EDITING HERE  ----------------------
     }
 
     @Override
     boolean doInvoke() {
         // ------------ START EDITING HERE ----------------------
-
+        isAuthorized
 
         // ------------ STOP EDITING HERE  ----------------------
     }

@@ -7,11 +7,22 @@
 
 package org.groovykoans.koan09
 
+import groovy.util.logging.Slf4j
 import org.codehaus.groovy.runtime.InvokerHelper
 
+
+
+@Slf4j()
 class Robot {
     // ------------ START EDITING HERE ----------------------
-
+    
+    int x = 0;
+    int y = 0;
+    
+    
+    def invokeMethod(String name, Object args) {
+        return "called invokeMethod $name $args"
+    }
 
     // ------------ STOP EDITING HERE  ----------------------
 }
